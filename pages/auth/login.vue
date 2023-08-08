@@ -37,6 +37,13 @@
 </template>
 
 <script setup>
+import {useUserData} from '~/stores/userData';
+import { storeToRefs } from 'pinia'
+const userDataStore = useUserData();
+const {getUser} = userDataStore
+const {userData} = storeToRefs(userDataStore)
+
+
 definePageMeta({
     layout: "auth",
 });
@@ -54,6 +61,10 @@ async function login() {
             method:'POST',
             body:user
         })
+        userDataStore.$patch({userData:data.value})
+        localStorage.setItem('auth', JSON.stringify(data.value))
+        navigateTo('/')
+        console.log(data.value.userData)
     }
 }
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
 const Sequelize = require('sequelize');
 
 
@@ -43,12 +44,11 @@ router.post("/login", async (req, res) =>{
     try {
         console.log(req.body)
         const logUser = {
-            userId: req.query.userId,
-            password: req.query.password
+            userId: req.body.userId,
+            password: req.body.password
         };
 
-        let user = await User.findOne({where:{userId: logUser.userId}});
-        console.log(user.dataValues)
+        let user = await User.findOne({where:{_userId: logUser.userId}});
         if (!user) {
             const response = {
                 status: "User does´t exist"
@@ -58,17 +58,25 @@ router.post("/login", async (req, res) =>{
 
 
         } else {
-            const toSend = user.dataValues;
-            if (bcrypt.compareSync(logUser.password,user.dataValues.password)) {
+            
+            if (bcrypt.compareSync(logUser.password,user.dataValues._password)) {
+                user.set("_password", undefined,{strict:false});
+                const token = jwt.sign({
+                    userData: user
+                }, "securepassword",{expiresIn: 60*60})
 
-                console.log(user.dataValues.nombre);
-                return res.status(200).json(toSend)
+                const response = {
+                    status:'success',
+                    token: token,
+                    userData: user
+                }
+                return res.status(200).json(response)
             };
 
         }
     } catch (error) {
-        console.error(error.errors[0]);
-        res.status(404).json(error.errors[0].message);
+        console.error(error);
+        res.status(404).json(error);
     }
 })
 
