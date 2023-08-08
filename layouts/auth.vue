@@ -1,20 +1,7 @@
 <template>
-    
-  <!-- Sidebar -->
-  <aside class="bg-gray-900 text-white h-screen w-64 fixed flex flex-col">
-    <!-- Sidebar content -->
-    <!-- You can add your sidebar content here -->
-    <UiSidebar />
-    
-  </aside>
-
-  <!-- Main content -->
-  <main class="ml-64 p-4">
+<main >
     <!-- Navbar -->
-    <nav class="bg-gray-800 text-white p-4">
-      <!-- Navbar content -->
-      <!-- You can add your navbar content here -->
-    </nav>
+    
 
     <!-- Page content -->
     <section class="bg-white p-4">
@@ -34,9 +21,8 @@
     </div>
   </footer>
 
-
 </template>
-
+    
 <script setup>
 
 </script>

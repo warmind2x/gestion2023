@@ -4,17 +4,36 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "devn": "nodemon api/index.js --exec babel-node",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/preset-env": "^7.22.10",
     "@nuxt/devtools": "latest",
+    "@tailwindcss/forms": "^0.5.4",
     "@types/node": "^18.16.19",
     "autoprefixer": "^10.4.14",
+    "nodemon": "^3.0.1",
     "nuxt": "^3.6.5",
     "postcss": "^8.4.27",
     "sass": "^1.64.0",
     "tailwindcss": "^3.3.3"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.2",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.32.1",
+    "sequelize-cli": "^6.6.1"
   }
 }
